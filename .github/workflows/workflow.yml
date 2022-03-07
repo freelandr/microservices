@@ -3,7 +3,7 @@ name: upload artefacts
 on:
   push:
     branches:
-    - main
+    - add-workflow
 
 jobs:
   deploy:
