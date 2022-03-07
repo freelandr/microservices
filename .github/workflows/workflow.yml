@@ -9,8 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: make-public
-        run: mkdir -p ./public && cp docker-compose.yml ./public/
+    - run: |
+       mkdir -p ./public 
+       cp docker-compose.yml ./public/
     - uses: actions/checkout@master
     - uses: jakejarvis/s3-sync-action@master
       with:
