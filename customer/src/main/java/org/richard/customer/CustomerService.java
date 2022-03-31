@@ -1,9 +1,13 @@
 package org.richard.customer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService {
+	
+	@Autowired
+	CustomerRepository repository;
 
 	public void registerCustomer(CustomerRegistrationRequest customerRequest) {
 		Customer customer = Customer.builder()
@@ -14,7 +18,7 @@ public class CustomerService {
 		
 		// TODO: check email valid
 		// TODO: check email not taken
-		// TODO: store customer in database
+		repository.save(customer);
 	}
 
 }

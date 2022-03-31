@@ -1,31 +1,31 @@
 services:
   # main postgres service
   postgres:
-    container_name: postgres
-    image: postgres
+    container_name: postgres        
+    image: postgres                 # name of the public postgres docker image
     environment:
       POSTGRES_USER: richard
       POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
     volumes:
-      - postgres:/data/postgres
+      - postgres:/data/postgres     # -> /var/lib/docker/volumes/microservices_postgres on host
     ports:
-      - "5432:5432"
+      - "5432:5432"                 # maps port 5432 in container to same port on host
     networks:
       - postgres
     restart: unless-stopped
-  # postgres admin GUI  
+  # postgres admin GUI (web app for managing postgres) 
   pgadmin:      
     container_name: pgadmin
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4           # name of the public pgadmin4 docker image 
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
-      - pgadmin:/var/lib/pgadmin
+      - pgadmin:/var/lib/pgadmin    # -> /var/lib/docker/volumes/microservices_pgadmin on host
     ports:
-      - "5050:80"
+      - "5050:80"                   # maps port 80 in container to 5050 on host
     networks:
       - postgres
     restart: unless-stopped    
